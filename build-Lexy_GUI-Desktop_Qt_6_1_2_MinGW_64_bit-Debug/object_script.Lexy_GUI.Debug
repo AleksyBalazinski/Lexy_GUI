@@ -1,0 +1,11 @@
+debug/main.o
+debug/mainwindow.o
+debug/Interpreter.o
+debug/Parser.o
+debug/errorHandler.o
+debug/generalUtilities.o
+debug/GenVal.o
+debug/prompt.o
+debug/Scanner.o
+debug/Token.o
+debug/moc_mainwindow.o

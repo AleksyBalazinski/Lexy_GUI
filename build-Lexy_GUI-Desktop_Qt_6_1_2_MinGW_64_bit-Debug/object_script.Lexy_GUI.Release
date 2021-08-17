@@ -1,0 +1,11 @@
+release/main.o
+release/mainwindow.o
+release/Interpreter.o
+release/Parser.o
+release/errorHandler.o
+release/generalUtilities.o
+release/GenVal.o
+release/prompt.o
+release/Scanner.o
+release/Token.o
+release/moc_mainwindow.o
