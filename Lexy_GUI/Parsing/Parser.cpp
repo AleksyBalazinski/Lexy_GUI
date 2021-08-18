@@ -51,7 +51,7 @@ Stmt* Parser::ifStatement()
     {
         consume(TokenType::RIGHT_PAREN, "Expect \')\' after if condition.");
     }
-    catch(ParseError)
+    catch(ParseError&)
     {
         delete condition;
         throw;
@@ -72,7 +72,7 @@ Stmt* Parser::printStatement()
     {
         consume(TokenType::SEMICOLON, "Expect \';\' after value.");
     }
-    catch(ParseError) 
+    catch(ParseError&)
     {
         delete value;
         throw; // rethrow
@@ -90,7 +90,7 @@ Stmt* Parser::varDeclaration()
     {
     consume(TokenType::SEMICOLON, "Expect \';\' after variable declaration.");
     }
-    catch(ParseError)
+    catch(ParseError&)
     {
         delete initializer;
         throw;
@@ -106,7 +106,7 @@ Stmt* Parser::whileStatement()
     {
         consume(TokenType::RIGHT_PAREN, "Expect \')\' after condition.");
     }
-    catch(ParseError)
+    catch(ParseError&)
     {
         delete condition;
         throw; // rethrow
@@ -123,7 +123,7 @@ Stmt* Parser::expressionStatement()
     {
         consume(TokenType::SEMICOLON, "Expect \';\' after expression.");
     }
-    catch(ParseError)
+    catch(ParseError&)
     {
         delete expr;
         throw; // rethrow
@@ -143,7 +143,7 @@ std::vector<Stmt*> Parser::block()
     {
         consume(TokenType::RIGHT_BRACE, "Expect \'}\' after block.");
     }
-    catch(ParseError)
+    catch(ParseError&)
     {
         for(Stmt* statement : statements) delete statement;
         throw; // rethrow
@@ -356,15 +356,17 @@ void Parser::synchronize()
         if(previous().type == TokenType::SEMICOLON) return;
         switch(peek().type)
         {
-            case TokenType::CLASS:
-            case TokenType::FUN:
+            //case TokenType::CLASS:
+            //case TokenType::FUN:
             case TokenType::VAR:
-            case TokenType::FOR:
+            //case TokenType::FOR:
             case TokenType::IF:
             case TokenType::WHILE:
             case TokenType::PRINT:
-            case TokenType::RETURN:
+            //case TokenType::RETURN:
                 return;
+            default:
+                break;
         }
         advance();
     }

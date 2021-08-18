@@ -19,7 +19,7 @@ public:
         {
             return values.at(name.lexeme);
         }
-        catch(std::out_of_range)
+        catch(std::out_of_range&)
         {
             throw RunTimeError{name, "Undefinde variable \'" + name.lexeme + "\'."};
         }
@@ -31,7 +31,7 @@ public:
             values.at(name.lexeme) = value;
             return;
         }
-        catch(std::out_of_range)
+        catch(std::out_of_range&)
         {
             throw RunTimeError{name, "Undefined variable \'" + name.lexeme + "\'."};
         }

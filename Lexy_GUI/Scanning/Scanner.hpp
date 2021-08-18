@@ -10,7 +10,7 @@ class Scanner
 {
     std::string source;
     std::vector<Token> tokens;
-    int start = 0, current = 0, line = 1;
+    std::string::size_type start = 0, current = 0, line = 1;
     void scanToken();
     void addToken(TokenType type);
     void addToken(TokenType type, const GenVal& literal);

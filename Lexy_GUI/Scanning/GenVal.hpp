@@ -10,9 +10,9 @@ public:
     {
         _double_, _string_, _bool_, _null_
     };
-    GenVal(double d) : d{d}, type{Type::_double_} {}
-    GenVal(const std::string& s) : s{s}, type{Type::_string_} {}
-    GenVal(bool b) : b{b}, type{Type::_bool_} {}
+    GenVal(double d) : type{Type::_double_}, d{d} {}
+    GenVal(const std::string& s) : type{Type::_string_}, s{s} {}
+    GenVal(bool b) : type{Type::_bool_}, b{b} {}
     GenVal(std::nullptr_t) : type{Type::_null_} {}
     GenVal() : GenVal(nullptr) {} // default constructor
     GenVal& operator=(const GenVal& other);

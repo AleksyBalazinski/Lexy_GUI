@@ -18,8 +18,8 @@ enum class TokenType
     // literals
     IDENTIFIER, STRING, NUMBER,
     // keywords
-    AND, CLASS, ELSE, FALSE, TRUE, FUN, FOR, IF, NIL, OR, 
-    PRINT, RETURN, SUPER, THIS, VAR, WHILE,
+    AND, /*CLASS,*/ ELSE, FALSE, TRUE, /*FUN, FOR,*/ IF, NIL, OR,
+    PRINT, /*RETURN, SUPER, THIS,*/ VAR, WHILE,
 
     END_OF_FILE
 };
@@ -30,9 +30,9 @@ public:
     TokenType type;
     std::string lexeme;
     GenVal literal;
-    int line;
+    std::string::size_type line;
 //public:
-    Token(TokenType type, std::string lexeme, GenVal literal, int line)
+    Token(TokenType type, std::string lexeme, GenVal literal, std::string::size_type line)
         : type{type}, lexeme{lexeme}, literal{literal}, line{line} {}
     
     friend std::ostream& operator<<(std::ostream& out, const Token& t);

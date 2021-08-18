@@ -84,6 +84,8 @@ public:
                 result.type = GenVal::Type::_double_;
                 result.d = -(right.d);
                 return;
+            default:
+                break;
         }
 
         result.type = GenVal::Type::_null_;
@@ -156,6 +158,8 @@ public:
                 result.type = GenVal::Type::_bool_;
                 result.b = isEqual(left, right);
                 return;
+            default:
+                break;
         }
         result.type = GenVal::Type::_null_;
     }

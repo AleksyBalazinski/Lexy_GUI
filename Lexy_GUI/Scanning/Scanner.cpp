@@ -83,7 +83,11 @@ void Scanner::scanToken()
         default: 
             if (utils::isDigit(c)) number();
             else if(utils::isAlpha(c)) identifier();
-            else error(line, "Unexpected character!"); break;
+            else
+            {
+                error(line, "Unexpected character!");
+                break;
+            }
     }
 }
 
@@ -136,7 +140,7 @@ void Scanner::identifier()
     std::string text = source.substr(start, current - start);
     TokenType type;
     try {type = keywords.at(text);}
-    catch(std::out_of_range) {type = TokenType::IDENTIFIER;}
+    catch(std::out_of_range&) {type = TokenType::IDENTIFIER;}
     if(type == TokenType::TRUE) {addToken(type, GenVal{true}); return;}
     if(type == TokenType::FALSE) {addToken(type, GenVal{false}); return;}
     addToken(type);
@@ -168,18 +172,18 @@ char Scanner::peekNext()
 std::unordered_map<std::string, TokenType> Scanner::keywords 
 {
     {"and", TokenType::AND},
-    {"class", TokenType::CLASS},
+    //{"class", TokenType::CLASS},
     {"else", TokenType::ELSE},
     {"false", TokenType::FALSE},
-    {"for", TokenType::FOR},
-    {"fun", TokenType::FUN},
+    //{"for", TokenType::FOR},
+    //{"fun", TokenType::FUN},
     {"if", TokenType::IF},
     {"nil", TokenType::NIL},
     {"or", TokenType::OR},
     {"print", TokenType::PRINT},
-    {"return", TokenType::RETURN},
-    {"super", TokenType::SUPER},
-    {"this", TokenType::THIS},
+    //{"return", TokenType::RETURN},
+    //{"super", TokenType::SUPER},
+    //{"this", TokenType::THIS},
     {"true", TokenType::TRUE},
     {"var", TokenType::VAR},
     {"while", TokenType::WHILE}
