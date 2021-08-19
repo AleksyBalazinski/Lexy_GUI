@@ -6,6 +6,7 @@
 #include "Statements.hpp"
 #include <vector>
 #include "Environment.hpp"
+#include <cmath>
 
 #include "../mainwindow.h"
 #include "../ui_mainwindow.h"
@@ -114,6 +115,16 @@ public:
                 result.type = GenVal::Type::_double_;
                 result.d = left.d * right.d;
                 return;
+            case TokenType::PERCENT:
+                checkNumberOperands(b->op, left, right);
+                result.type = GenVal::Type::_double_;
+                result.d = static_cast<int>(left.d) % static_cast<int>(right.d);
+                return;
+            case TokenType::CARET:
+                checkNumberOperands(b->op, left, right);
+                result.type = GenVal::Type::_double_;
+                result.d = std::pow(left.d, right.d);
+                return;
             case TokenType::PLUS:
                 if(left.type == GenVal::Type::_double_ && right.type == GenVal::Type::_double_)
                 {
@@ -127,8 +138,8 @@ public:
                     result.s = left.s + right.s;
                     return;
                 }
-
-                throw RunTimeError{b->op, "Operands must be two numbers or two strings."};
+                else
+                    throw RunTimeError{b->op, "Operands must be two numbers or two strings."};
             // comparisons
             case TokenType::GREATER:
                 checkNumberOperands(b->op, left, right);

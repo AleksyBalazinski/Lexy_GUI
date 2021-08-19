@@ -17,6 +17,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->out_label->setText("Output:");
     highlighter = new Highlighter(ui->console->document());
+
+    // set up tab width for 4 spaces
+    QFont consoleFont;
+    consoleFont.setFamily("Consolas");
+    consoleFont.setPointSize(11);
+    const int tabStop = 2;
+    QFontMetrics metrics(consoleFont);
+    ui->console->setTabStopDistance(tabStop * metrics.maxWidth());
+
+
 }
 
 MainWindow::~MainWindow()

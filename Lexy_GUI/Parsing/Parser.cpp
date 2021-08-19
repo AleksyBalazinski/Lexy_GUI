@@ -231,7 +231,7 @@ Expr* Parser::comparison()
 Expr* Parser::term()
 {
     Expr* expr = factor();
-    while(match({TokenType::MINUS, TokenType::PLUS}))
+    while(match({TokenType::MINUS, TokenType::PLUS, TokenType::PERCENT}))
     {
         Token op = previous();
         Expr* right = factor();
@@ -260,11 +260,25 @@ Expr* Parser::unary()
     if(match({TokenType::BANG, TokenType::MINUS}))
     {
         Token op = previous();
-        Expr* right = unary();
+        Expr* right = exponentiation();
         return new Unary{op, right};
     }
 
-    return primary();
+    return exponentiation();
+}
+
+Expr* Parser::exponentiation()
+{
+    Expr* expr = primary();
+
+    while(match({TokenType::CARET}))
+    {
+        Token op = previous();
+        Expr* right = primary();
+        expr = new Binary{expr, op, right};
+    }
+
+    return expr;
 }
 
 Expr* Parser::primary()

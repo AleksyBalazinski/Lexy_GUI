@@ -47,6 +47,8 @@ void Scanner::scanToken()
         case '+': addToken(TokenType::PLUS); break;
         case ';': addToken(TokenType::SEMICOLON); break;
         case '*': addToken(TokenType::STAR); break;
+        case '%': addToken(TokenType::PERCENT); break;
+        case '^': addToken(TokenType::CARET); break;
         case '/': // comment or SLASH
             if(match('/'))
             {

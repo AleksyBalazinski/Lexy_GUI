@@ -30,6 +30,7 @@ private:
     Expr* term();
     Expr* factor();
     Expr* unary();
+    Expr* exponentiation();
     Expr* primary();
     // utilities
     bool match(std::initializer_list<TokenType> types);
